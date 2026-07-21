@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 import { formatPKR, getLatestPrices } from "@/lib/data";
 import { Search } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/products")({
+export const Route = createFileRoute("/_authenticated/products/")({
   component: ProductsPage,
 });
 
