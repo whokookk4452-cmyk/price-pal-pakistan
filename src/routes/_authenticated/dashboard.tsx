@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Sparkles, ShoppingCart, TrendingDown, Wallet } from "lucide-react";
+import { Clock, Sparkles, ShoppingCart, Store, TrendingDown, Wallet } from "lucide-react";
 import { formatPKR, getLatestPrices, getOrCreateDefaultList } from "@/lib/data";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
