@@ -4,11 +4,27 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Sparkles, ShoppingCart, TrendingDown, Wallet } from "lucide-react";
+import { Clock, Sparkles, ShoppingCart, Store, TrendingDown, Wallet } from "lucide-react";
 import { formatPKR, getLatestPrices, getOrCreateDefaultList } from "@/lib/data";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
+  head: () => ({
+    title: "Dashboard | SastaBazaar",
+    meta: [
+      {
+        name: "description",
+        content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
+      },
+      { property: "og:title", content: "Dashboard | SastaBazaar" },
+      {
+        property: "og:description",
+        content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
 });
 
 function Dashboard() {
@@ -17,9 +33,14 @@ function Dashboard() {
   const { data } = useQuery({
     queryKey: ["dashboard", user.id],
     queryFn: async () => {
-      const [{ data: profile }, list] = await Promise.all([
+      const [{ data: profile }, list, { data: recentReports }] = await Promise.all([
         supabase.from("profiles").select("name, monthly_budget").eq("id", user.id).maybeSingle(),
         getOrCreateDefaultList(user.id),
+        supabase
+          .from("price_reports")
+          .select("id, price, store_name, city, created_at, products(name)")
+          .order("created_at", { ascending: false })
+          .limit(5),
       ]);
       const { data: items } = await supabase
         .from("shopping_list_items")
@@ -27,6 +48,15 @@ function Dashboard() {
         .eq("list_id", list.id);
       type Item = { quantity: number; products: { id: string; name: string } | null };
       const rows = (items ?? []) as Item[];
+      type RecentReport = {
+        id: string;
+        price: number;
+        store_name: string;
+        city: string;
+        created_at: string;
+        products: { name: string } | null;
+      };
+      const reports = (recentReports ?? []) as RecentReport[];
       const productIds = rows.map((i) => i.products?.id).filter(Boolean) as string[];
       const prices = await getLatestPrices(productIds);
       const total = rows.reduce((acc, i) => {
@@ -40,6 +70,7 @@ function Dashboard() {
         total,
         itemCount: rows.length,
         listId: list.id,
+        recentReports: reports,
       };
     },
   });
@@ -123,6 +154,51 @@ function Dashboard() {
           <Button asChild size="lg">
             <Link to="/assistant">Chat now</Link>
           </Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Clock className="size-5 text-primary" />
+            <CardTitle className="text-base">Recent Price Reports</CardTitle>
+          </div>
+          <p className="text-sm text-muted-foreground">Latest prices submitted by shoppers across Pakistan.</p>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {data?.recentReports && data.recentReports.length > 0 ? (
+              data.recentReports.map((report) => (
+                <div
+                  key={report.id}
+                  className="flex items-center justify-between gap-4 p-3 rounded-lg border border-border bg-background/50 hover:bg-accent/30 transition-colors"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="font-medium truncate">
+                      {report.products?.name ?? "Unknown product"}
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Store className="size-3.5" />
+                      <span className="truncate">
+                        {report.store_name} • {report.city}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="font-semibold text-success">{formatPKR(Number(report.price))}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {new Date(report.created_at).toLocaleDateString("en-PK", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">No price reports yet.</p>
+            )}
+          </div>
         </CardContent>
       </Card>
 
