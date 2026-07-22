@@ -141,6 +141,51 @@ function Dashboard() {
         </CardContent>
       </Card>
 
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Clock className="size-5 text-primary" />
+            <CardTitle className="text-base">Recent Price Reports</CardTitle>
+          </div>
+          <p className="text-sm text-muted-foreground">Latest prices submitted by shoppers across Pakistan.</p>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {data?.recentReports && data.recentReports.length > 0 ? (
+              data.recentReports.map((report) => (
+                <div
+                  key={report.id}
+                  className="flex items-center justify-between gap-4 p-3 rounded-lg border border-border bg-background/50 hover:bg-accent/30 transition-colors"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="font-medium truncate">
+                      {report.products?.name ?? "Unknown product"}
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Store className="size-3.5" />
+                      <span className="truncate">
+                        {report.store_name} • {report.city}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="font-semibold text-success">{formatPKR(Number(report.price))}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {new Date(report.created_at).toLocaleDateString("en-PK", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">No price reports yet.</p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
