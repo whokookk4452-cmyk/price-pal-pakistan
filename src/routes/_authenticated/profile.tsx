@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { LogOut } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/_authenticated/profile")({
 function ProfilePage() {
   const { user } = Route.useRouteContext();
   const qc = useQueryClient();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [budget, setBudget] = useState("");
 
@@ -48,11 +50,28 @@ function ProfilePage() {
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const signOut = async () => {
+    try {
+      await qc.cancelQueries();
+      qc.clear();
+      await supabase.auth.signOut();
+      navigate({ to: "/auth", replace: true });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Sign out failed");
+    }
+  };
+
   return (
     <div className="p-4 md:p-8 max-w-xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl md:text-3xl font-bold">Profile</h1>
-        <p className="text-muted-foreground">Update your details.</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold">Profile</h1>
+          <p className="text-muted-foreground">Update your details.</p>
+        </div>
+        <Button variant="outline" onClick={signOut} className="gap-2">
+          <LogOut className="size-4" />
+          Sign out
+        </Button>
       </div>
 
       <Card>
