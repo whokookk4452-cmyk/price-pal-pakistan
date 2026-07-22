@@ -60,16 +60,16 @@ friend rather than a formal analyst.
 ## f. Screenshots
 
 **Dashboard**
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](dashboard.png)
 
 **Products & Price Reports**
-![Products](screenshots/products.png)
+![Products](products.png)
 
 **AI Shopping Assistant**
-![AI Assistant](screenshots/ai-assistant.png)
+![AI Assistant](ai-assistant.png)
 
 **Sign Up / Login**
-![Sign Up](screenshots/signup.png)
+![Sign Up](signup.png)
 
 ## g. How to run the project
 
