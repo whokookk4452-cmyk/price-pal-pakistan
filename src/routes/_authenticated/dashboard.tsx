@@ -17,9 +17,14 @@ function Dashboard() {
   const { data } = useQuery({
     queryKey: ["dashboard", user.id],
     queryFn: async () => {
-      const [{ data: profile }, list] = await Promise.all([
+      const [{ data: profile }, list, { data: recentReports }] = await Promise.all([
         supabase.from("profiles").select("name, monthly_budget").eq("id", user.id).maybeSingle(),
         getOrCreateDefaultList(user.id),
+        supabase
+          .from("price_reports")
+          .select("id, price, store_name, city, created_at, products(name)")
+          .order("created_at", { ascending: false })
+          .limit(5),
       ]);
       const { data: items } = await supabase
         .from("shopping_list_items")
@@ -27,6 +32,15 @@ function Dashboard() {
         .eq("list_id", list.id);
       type Item = { quantity: number; products: { id: string; name: string } | null };
       const rows = (items ?? []) as Item[];
+      type RecentReport = {
+        id: string;
+        price: number;
+        store_name: string;
+        city: string;
+        created_at: string;
+        products: { name: string } | null;
+      };
+      const reports = (recentReports ?? []) as RecentReport[];
       const productIds = rows.map((i) => i.products?.id).filter(Boolean) as string[];
       const prices = await getLatestPrices(productIds);
       const total = rows.reduce((acc, i) => {
@@ -40,6 +54,7 @@ function Dashboard() {
         total,
         itemCount: rows.length,
         listId: list.id,
+        recentReports: reports,
       };
     },
   });
