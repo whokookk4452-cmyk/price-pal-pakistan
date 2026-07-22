@@ -75,14 +75,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Track grocery prices across Pakistani stores, plan your shopping against your budget, and get AI recommendations to save more.",
       },
-      { property: "og:title", content: "SastaBazaar — Grocery Prices & AI Shopping Assistant" },
+      { property: "og:title", content: "SastaBazaar — Crowdsourced Grocery Prices in Pakistan" },
       {
         property: "og:description",
         content:
-          "Crowdsourced grocery prices, budget planning, and an AI shopping assistant for Pakistan.",
+          "Track grocery prices across Pakistani stores, plan your shopping against your budget, and get AI recommendations to save more.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "SastaBazaar — Crowdsourced Grocery Prices in Pakistan" },
+      { name: "twitter:description", content: "Track grocery prices across Pakistani stores, plan your shopping against your budget, and get AI recommendations to save more." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cf10f42e-91fe-4996-a271-ad60b93931d5/id-preview-36837a3c--1f45f1da-f6a3-4e80-b16d-204e1fa7af7d.lovable.app-1784698689557.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cf10f42e-91fe-4996-a271-ad60b93931d5/id-preview-36837a3c--1f45f1da-f6a3-4e80-b16d-204e1fa7af7d.lovable.app-1784698689557.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
