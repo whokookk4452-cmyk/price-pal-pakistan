@@ -10,8 +10,8 @@ import { formatPKR, getLatestPrices, getOrCreateDefaultList } from "@/lib/data";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
   head: () => ({
-    title: "Dashboard | AI Price Tracker",
     meta: [
+      { title: "Dashboard | AI Price Tracker" },
       {
         name: "description",
         content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
