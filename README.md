@@ -1,10 +1,10 @@
-# Qeemat — AI Price Tracker for Pakistan
+# AI Price Tracker for Pakistan
 
 ## a. What it does & the problem it solves
 
-**Qeemat — AI Price Tracker** is a web app that helps Pakistani households track and compare grocery prices across different stores and cities. Due to constant inflation, people rarely know whether they're paying a fair price for everyday items like rice, chicken, or cooking oil — and there's no shared, trustworthy source of current prices from real stores.
+**AI Price Tracker** is a web app that helps Pakistani households track and compare grocery prices across different stores and cities. Due to constant inflation, people rarely know whether they're paying a fair price for everyday items like rice, chicken, or cooking oil — and there's no shared, trustworthy source of current prices from real stores.
 
-Qeemat solves this by letting users **report prices they see in stores**, building a crowdsourced price database that anyone can browse. Users can also build a shopping list against a monthly budget, and ask an AI assistant for personalized, budget-aware shopping advice based on real reported prices — not guesses.
+AI Price Tracker solves this by letting users **report prices they see in stores**, building a crowdsourced price database that anyone can browse. Users can also build a shopping list against a monthly budget, and ask an AI assistant for personalized, budget-aware shopping advice based on real reported prices — not guesses.
 
 **Who it's for:** Families, students, housewives, and daily shoppers in Pakistan who want a clearer, community-driven picture of grocery prices before they shop — without relying on any single store's app or word of mouth.
 

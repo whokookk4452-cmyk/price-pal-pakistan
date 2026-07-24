@@ -53,7 +53,7 @@ function AuthLayout() {
             <ShoppingBasket className="size-5" />
           </div>
           <div>
-            <div className="font-bold leading-tight">Qeemat</div>
+            <div className="font-bold leading-tight">AI Price Tracker</div>
             <div className="text-xs text-muted-foreground">Pakistan</div>
           </div>
         </div>
@@ -92,7 +92,7 @@ function AuthLayout() {
             <div className="size-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
               <ShoppingBasket className="size-4" />
             </div>
-            <span className="font-bold">Qeemat</span>
+            <span className="font-bold">AI Price Tracker</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setOpen((o) => !o)}>
             <Menu className="size-5" />
