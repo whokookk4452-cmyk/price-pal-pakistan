@@ -10,13 +10,13 @@ import { formatPKR, getLatestPrices, getOrCreateDefaultList } from "@/lib/data";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
   head: () => ({
-    title: "Dashboard | Qeemat",
+    title: "Dashboard | AI Price Tracker",
     meta: [
       {
         name: "description",
         content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
       },
-      { property: "og:title", content: "Dashboard | Qeemat" },
+      { property: "og:title", content: "Dashboard | AI Price Tracker" },
       {
         property: "og:description",
         content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
