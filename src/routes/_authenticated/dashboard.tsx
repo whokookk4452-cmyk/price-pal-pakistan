@@ -10,13 +10,13 @@ import { formatPKR, getLatestPrices, getOrCreateDefaultList } from "@/lib/data";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
   head: () => ({
-    title: "Dashboard | SastaBazaar",
+    title: "Dashboard | Qeemat",
     meta: [
       {
         name: "description",
         content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",
       },
-      { property: "og:title", content: "Dashboard | SastaBazaar" },
+      { property: "og:title", content: "Dashboard | Qeemat" },
       {
         property: "og:description",
         content: "View your grocery budget, shopping list estimate, and recent price reports from across Pakistan.",

@@ -44,7 +44,7 @@ function AuthPage() {
     });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Account created! You can start using SastaBazaar.");
+    toast.success("Account created! You can start using Qeemat.");
     navigate({ to: "/dashboard" });
   };
 
@@ -56,7 +56,7 @@ function AuthPage() {
             <div className="size-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center">
               <ShoppingBasket className="size-5" />
             </div>
-            <span className="text-2xl font-bold tracking-tight">SastaBazaar</span>
+            <span className="text-2xl font-bold tracking-tight">Qeemat</span>
           </div>
           <p className="text-muted-foreground text-sm">
             Track prices. Beat inflation. Shop smarter.
